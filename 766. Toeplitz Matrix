@@ -1,0 +1,13 @@
+class Solution:
+    def isToeplitzMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: bool
+        """
+        R = len(matrix)
+        C = len(matrix[0])
+        
+        for row in range(0, R-1):
+            if matrix[row][:C-1] != matrix[row+1][1:C]:
+                return False
+        return True
