@@ -1,0 +1,22 @@
+class Solution:
+    def increasingBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        res=[]
+        def preorder(node):
+            if node:
+                preorder(node.left)
+                res.append(node.val)
+                preorder(node.right)
+                
+        preorder(root)
+        tree=TreeNode(res[0])
+        res=res[1:]
+        new_root=tree
+        for elem in res:
+            tree.right=TreeNode(elem)
+            tree=tree.right
+            
+        return new_root
