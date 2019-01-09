@@ -1,0 +1,38 @@
+class Solution(object):
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        
+        keyboard = [['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+                    ['a', 's', 'd','f', 'g', 'h', 'j', 'k', 'l'],
+                    ['z', 'x', 'c', 'v', 'b', 'n', 'm'] ]
+        
+        row = 0
+        res = []
+        
+        for w in words:
+        
+            wLower = w.lower()
+            if wLower[0] in keyboard[0]:
+                row = 0
+            elif wLower[0] in keyboard[1]:
+                row = 1
+            else:
+                row = 2
+                
+            isSame = False
+                
+            for i in range(1, len(wLower)):
+                if wLower[i] in keyboard[row]:
+                    isSame = True
+					
+                else:
+                    isSame = False
+                    break
+					
+            if len(w) < 2 or isSame:
+                res.append(w)
+                
+        return res
