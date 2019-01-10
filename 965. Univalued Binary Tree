@@ -1,0 +1,19 @@
+class Solution:
+    def isUnivalTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        q = [root]
+        val = root.val
+        while q:
+            node = q.pop(0)
+            if(node.val != val):
+                return False
+            else:
+                val = node.val
+            if(node.left):
+                q.append(node.left)
+            if(node.right):
+                q.append(node.right)     
+        return True
