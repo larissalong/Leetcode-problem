@@ -1,0 +1,15 @@
+class Solution:
+    def uncommonFromSentences(self, A, B):
+        """
+        :type A: str
+        :type B: str
+        :rtype: List[str]
+        """
+        res = []
+        
+        list = A.split(' ') + B.split(' ')
+        for word in list:
+            if list.count(word) == 1:
+                res.append(word)
+        
+        return res
