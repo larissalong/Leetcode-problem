@@ -1,0 +1,5 @@
+class Solution:
+    def reorderLogFiles(self, logs):
+        l = filter(lambda l: l[l.find(" ") + 1].isalpha(), logs)
+        d = filter(lambda l: l[l.find(" ") + 1].isdigit(), logs)
+        return sorted(l, key = lambda x: (x[x.find(" "):], x[:x.find(" ")])) + list(d)
