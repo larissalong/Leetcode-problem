@@ -1,0 +1,18 @@
+class Solution:
+    def distributeCandies(self, candies):
+        """
+        :type candies: List[int]
+        :rtype: int
+        """
+        kinds = len(list(set(candies)))
+        
+        num = len(candies) / 2
+
+        return int(min(kinds, num))
+ 
+# Use set to find the unique element in candies, then compare it with the number of candies each one should be received.
+
+# Time complexity : O(n). The entire candiescandies array is traversed only once. Here, N refers to the size of candiescandies array.
+
+# Space complexity : O(n). set will be of size N in the worst case.
+  
