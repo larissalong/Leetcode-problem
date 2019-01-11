@@ -1,0 +1,13 @@
+class Solution:
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        st,dc=[],{}
+        for x in reversed(nums2):
+            while st and x>st[-1]: st.pop()
+            dc[x]=st[-1] if st else -1
+            st.append(x)
+        return [dc[y] for y in nums1]
