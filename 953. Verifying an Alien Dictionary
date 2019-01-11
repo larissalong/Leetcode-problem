@@ -1,0 +1,10 @@
+class Solution:
+    def isAlienSorted(self, words, order):
+        """
+        :type words: List[str]
+        :type order: str
+        :rtype: bool
+        """
+        lookup = {ch: i for i, ch in enumerate(order)}
+        X = sorted(words, key=lambda word: [lookup[ch] for ch in word])
+        return X == words
