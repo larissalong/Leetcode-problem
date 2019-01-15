@@ -1,0 +1,7 @@
+# Write your MySQL query statement below
+select min(dist) as shortest
+from (
+select min(abs(a.x - b.x) as dist
+from point a
+join point b
+on a.x <> b.x) c
