@@ -1,0 +1,4 @@
+select max(num) as num from (
+select num, count(*) from number
+group by 1
+having count(*) = 1) a
