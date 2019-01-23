@@ -1,0 +1,11 @@
+# Write your MySQL query statement below
+
+select Name
+from Candidate c
+where id = (
+select CandidateId
+    from Vote
+    group by 1
+    order by count(*) desc
+    limit 1
+);
