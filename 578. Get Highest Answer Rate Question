@@ -1,0 +1,9 @@
+# Write your MySQL query statement below
+select question_id as survey_log from
+(
+select question_id, count(*)
+from survey_log
+where answer_id is not null
+group by 1
+order by 2 desc
+limit 1) a;
