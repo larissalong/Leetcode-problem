@@ -1,0 +1,19 @@
+# for postgreSQL
+
+select a.America, b.Asia, c.Europe from 
+(select ROW_NUMBER() OVER(ORDER BY name) as num, 
+        case when continent = 'America' then name end as America
+ from student
+ where continent = 'America') a
+left join
+(select ROW_NUMBER() OVER(ORDER BY name) as num, 
+ case when continent = 'Asia' then name end as Asia
+from student 
+where continent = 'Asia') b
+on a.num = b.num
+left join 
+(select ROW_NUMBER() OVER(ORDER BY name) as num, 
+ case when continent = 'Europe' then name end as Europe
+from student 
+where continent = 'Europe') c
+on a.num = c.num
