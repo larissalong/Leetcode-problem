@@ -1,0 +1,8 @@
+select e1.Id
+, e1.Company
+, e1.Salary
+from Employee e1, Employee e2
+where e1.Company = e2.Company 
+group by 2, 3
+having sum(case when e1.Salary = e2.Salary then 1 else 0 end) >= abs(sum(sign(e1.Salary - e2.Salary)))
+order by 1;
