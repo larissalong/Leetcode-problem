@@ -1,0 +1,12 @@
+/* Write your T-SQL query statement below */
+select Department, Employee, Salary from 
+(
+select d.Name as Department
+    , e.Name as Employee
+    , e.Salary
+    , dense_rank() over (partition by d.Name order by e.Salary desc) as ranking
+from Employee e
+inner join Department d
+on e.DepartmentId = d.Id
+) a
+where ranking <= 3;
