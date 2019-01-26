@@ -1,0 +1,8 @@
+# Write your MySQL query statement below
+select Request_at as Day
+, round(count(case when Status like 'cancelled%' then 1 else null end) / count(*), 2) as 'Cancellation Rate'
+from Trips 
+where Request_at between '2013-10-01' and '2013-10-03'
+and Client_Id in (select Users_Id from Users where Banned = 'No')
+and Driver_Id in (select Users_Id from Users where Banned = 'No')
+group by 1
