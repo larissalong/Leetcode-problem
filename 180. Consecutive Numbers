@@ -1,0 +1,8 @@
+/* Write your T-SQL query statement below */
+select distinct a.Num as ConsecutiveNums
+from Logs a
+join Logs b
+on a.Id = b.Id - 1
+join Logs c
+on a.Id = c.Id - 2
+where a.Num = b.Num and a.Num = c.Num;
