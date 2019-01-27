@@ -1,0 +1,9 @@
+/* Write your T-SQL query statement below */
+select Department, Employee, Salary 
+from (
+select d.Name as Department, e.Name as Employee, e.Salary, rank() over (partition by d.Name order by e.Salary desc) as rnk
+from Employee e
+join Department d
+on e.DepartmentId = d.Id ) a
+where rnk = 1
+order by 3 desc
