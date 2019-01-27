@@ -1,0 +1,6 @@
+/* Write your T-SQL query statement below */
+select max(Salary) as SecondHighestSalary from (
+select Salary, rank() over (order by Salary desc) as rnk
+from Employee
+) a
+where rnk = 2
