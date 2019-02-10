@@ -1,0 +1,10 @@
+class Solution:
+    def depthSum(self, nestedList, depth=1):
+        result = 0
+        n = len(nestedList)
+        for i in range(n):
+            if nestedList[i].isInteger():                
+                result += nestedList[i].getInteger()*depth
+            else:
+                result += self.depthSum(nestedList[i].getList(), depth+1)        
+        return result  
