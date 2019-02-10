@@ -1,0 +1,9 @@
+class Solution:
+    def canPermutePalindrome(self, s: 'str') -> 'bool':
+        D = {}
+        for i in s:
+            if i in D:
+                D.pop(i) #removes and returns last value from the list or the given index value
+            else:
+                D[i] = 1
+        return len(D) <= 1
