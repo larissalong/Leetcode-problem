@@ -1,0 +1,17 @@
+/* Write your T-SQL query statement below */
+with c as (
+select a.player_id, install_dt, event_date
+from Activity a
+join (
+select player_id, min(event_date) install_dt
+from Activity
+group by player_id
+    ) b 
+on a.player_id = b.player_id
+)
+select install_dt, count(distinct player_id) installs,
+coalesce(round(count(distinct case when datediff(d, install_dt, event_date) = 1 then player_id else null end) /
+nullif(count(distinct player_id), 0), 2), 0) Day1_retention
+from c
+group by install_dt
+order by install_dt
