@@ -1,3 +1,4 @@
+Version 1:
 select e1.Id
 , e1.Company
 , e1.Salary
@@ -6,3 +7,17 @@ where e1.Company = e2.Company
 group by 2, 3
 having sum(case when e1.Salary = e2.Salary then 1 else 0 end) >= abs(sum(sign(e1.Salary - e2.Salary)))
 order by 1;
+
+
+Version 2:
+/* Write your T-SQL query statement below */
+with a as (
+select Id, Company, Salary, 
+row_number() over (partition by Company order by Salary, Id) seq_asc,
+row_number() over (partition by Company order by Salary desc, Id desc) seq_desc
+from Employee
+) 
+select Id, Company, Salary
+from a
+where seq_asc between seq_desc - 1 and seq_desc + 1
+order by Company, Salary
