@@ -1,0 +1,18 @@
+/* Write your T-SQL query statement below */
+with a as (
+select user_id, order_date, item_id, 
+row_number() over (partition by user_id order by order_date) seq
+from Users u
+left join Orders o on u.user_id = o.seller_id
+),
+b as (
+select user_id, item_id
+from a
+where seq = 2
+)
+select u.user_id seller_id, 
+(case when i.item_brand = u.favorite_brand then 'yes' else 'no' end) '2nd_item_fav_brand'
+from Users u
+left join b on b.user_id = u.user_id
+left join Items i on b.item_id = i.item_id
+order by b.user_id
