@@ -1,0 +1,19 @@
+/* Write your T-SQL query statement below */
+with e as (
+select a.player_id, group_id, 
+row_number() over (partition by group_id order by total_score desc, a.player_id) seq
+from (
+select player_id, sum(score) total_score
+from (
+select first_player player_id, first_score score from Matches
+union all
+(select second_player player_id, second_score score from Matches)
+    ) c
+group by player_id
+    ) a 
+join Players b on a.player_id = b.player_id
+)
+select group_id, player_id 
+from e
+where seq = 1
+order by group_id
