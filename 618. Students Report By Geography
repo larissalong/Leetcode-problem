@@ -1,5 +1,5 @@
 # for postgreSQL
-
+V1:
 select a.America, b.Asia, c.Europe from 
 (select ROW_NUMBER() OVER(ORDER BY name) as num, 
         case when continent = 'America' then name end as America
@@ -17,3 +17,13 @@ left join
 from student 
 where continent = 'Europe') c
 on a.num = c.num
+
+
+V2:
+/* Write your T-SQL query statement below */
+select America, Asia, Europe
+from (
+    select continent, name, row_number() over (partition by continent order by name) seq
+    from student
+) as source
+pivot (max(name) for continent in (America, Asia, Europe)) as pvt
