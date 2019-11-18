@@ -1,3 +1,4 @@
+Version 1:
 # Write your MySQL query statement below
 select a.* 
 from stadium a, stadium b, stadium c
@@ -9,3 +10,22 @@ and ((a.id = b.id - 1 and a.id = c.id - 2)
     or (a.id = b.id + 1 and a.id = c.id - 1))
 group by 1;
     
+    
+Version 2:
+/* Write your T-SQL query statement below */
+with a as (
+select id, visit_date, people, row_number() over (order by id) seq
+from stadium
+where people >= 100
+), b as (
+select a.*, (id-seq) initial
+from a
+), c as (
+select initial
+from b
+group by initial
+having count(*) >= 3
+)
+select b.id, b.visit_date, b.people
+from b
+join c on b.initial = c.initial
